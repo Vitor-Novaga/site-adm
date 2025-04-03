@@ -1,0 +1,16 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 250px); /* Desconta a largura da sidebar */
+    left: 250px; /* Para não sobrepor a sidebar */
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 900;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 50px; /* Evita que o conteúdo sobreponha o footer */
+}

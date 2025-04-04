@@ -1,16 +1,22 @@
 .navbar {
     width: 100%;
     height: 60px;
-    background-color: #222;
+    background-color: #5b3823;
     color: white;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 250px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
 }
+.navbar h2{
+
+    text-align: center;
+
+}
+
 
 .navbar ul {
     list-style: none;
@@ -36,8 +42,8 @@
     border-radius: 5px;
 }
 
-/* Ajuste para que o conteúdo não fique coberto pela navbar */
+/* Ajuste para não ficar coberto pela navbar */
 .content {
-    margin-top: 70px; /* Adiciona um espaçamento abaixo da navbar */
+    margin-top: 70px; 
     padding: 20px;
 }

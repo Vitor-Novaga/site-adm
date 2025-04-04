@@ -2,29 +2,22 @@
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../Database/db_connection.php';
 
-// Verifica se a conexão foi estabelecida
+
 if (!$conn) {
     die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
 }
 
-// Configuração da paginação
-$limite = 5; // Número de usuários por página
+
+$limite = 5; 
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina - 1) * $limite;
 
-// Pesquisa
-$pesquisa = isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '';
-$whereClause = "";
-if (!empty($pesquisa)) {
-    $whereClause = "WHERE nome LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%'";
-}
 
-// Consulta para buscar os usuários com paginação
-$query = "SELECT * FROM usuario $whereClause LIMIT $limite OFFSET $offset";
+$query = "SELECT * FROM usuario LIMIT $limite OFFSET $offset";
 $result = $conn->query($query);
 
-// Contagem total de registros para paginação
-$queryTotal = "SELECT COUNT(*) as total FROM usuario $whereClause";
+
+$queryTotal = "SELECT COUNT(*) as total FROM usuario";
 $totalResult = $conn->query($queryTotal);
 $totalUsuarios = $totalResult->fetch_assoc()['total'];
 $totalPaginas = ceil($totalUsuarios / $limite);
@@ -48,11 +41,6 @@ $totalPaginas = ceil($totalUsuarios / $limite);
         <h1>Gerenciar Usuários</h1>
         <p>Aqui você pode adicionar, editar e remover usuários.</p>
 
-        <!-- Barra de Pesquisa -->
-        <form method="GET" action="usuarios.php" class="form-pesquisa">
-            <input type="text" name="pesquisa" placeholder="Buscar usuário..." value="<?= htmlspecialchars($pesquisa) ?>">
-            <button type="submit" class="btn btn-pesquisar">Pesquisar</button>
-        </form>
 
         <a href="add_usuario.php" class="btn btn-adicionar">Adicionar Usuário</a>
 
@@ -82,12 +70,13 @@ $totalPaginas = ceil($totalUsuarios / $limite);
             <?php endwhile; ?>
         </table>
 
-        <!-- Paginação -->
-        <div class="paginacao">
-            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-                <a href="usuarios.php?pagina=<?= $i ?>&pesquisa=<?= urlencode($pesquisa) ?>" class="<?= ($pagina == $i) ? 'ativo' : '' ?>"> <?= $i ?> </a>
-            <?php endfor; ?>
-        </div>
+    <!-- Paginação -->
+    <div class="paginacao">
+        <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+            <a href="usuarios.php?pagina=<?= $i ?>" class="pagina <?= ($pagina == $i) ? 'ativo' : '' ?>"> <?= $i ?> </a>
+        <?php endfor; ?>
+    </div>
+
     </div>
 
     <?php include_once __DIR__ . '/../../components/footer.php'; ?>

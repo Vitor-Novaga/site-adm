@@ -1,12 +1,14 @@
 .sidebar {
-    width: 250px; /* Largura da sidebar */
-    height: 100vh; /* Ocupa toda a altura da tela */
+    width: 250px; 
+    height: 100vh; 
     background-color: #333;
     color: white;
     position: fixed;
     left: 0;
-    top: 60px; /* Ajusta para ficar abaixo da navbar */
+    top: 60px; 
     padding-top: 20px;
+    display: flex;
+    justify-content: center ;
 }
 
 .sidebar ul {
@@ -32,8 +34,8 @@
     border-radius: 5px;
 }
 
-/* Ajuste para que o conteúdo não fique sobreposto */
+/* não ficar sobreposto */
 .content {
-    margin-left: 260px; /* Adiciona um espaço igual à largura da sidebar */
+    margin-left: 260px; 
     padding: 20px;
 }
